@@ -1,3 +1,5 @@
+/* eslint-disable jsx-quotes */
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable space-infix-ops */
 /* eslint-disable keyword-spacing */
@@ -15,28 +17,20 @@ import React, {useState} from 'react';
 import { Text,View, Button} from 'react-native';
 import styles from './styles/mainStyle';
 import Card from './card/Card';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import SigninScreen from './screens/SigninScreen';
+const Stack=createNativeStackNavigator();
 const App=()=>{
-const [showCard, setshowCard]= useState(true);
-
-const changeShowCard=() =>{
-  setshowCard(!showCard);
-};
-let imgUrl={
-  uri:'https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/273219677_630577914907680_8040586880275935717_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=sKsre9uy3TkAX-g4gQD&_nc_ht=scontent.fhan14-2.fna&oh=00_AfD3cYQrcwYebWDwLyiR5WQL1aq-A3mGfqmZzLRpwMC3SQ&oe=64676552',
-}
   return(
-    <View style={styles.container}>
-      <Text style={[styles.fontBold,styles.red]}>MD18101</Text>
-      <Text style={[styles.fontSemibold,styles.blue]}>Nguyễn Hoàng Trà</Text>
-      <Text style={[styles.fontSemibold,styles.black]}>PH26979</Text>
-      <Text>Chạy ứng dụng react native thành công</Text>
-           {showCard ? (
-      <Card title="Sample pass props to component" imgUrl={imgUrl}/>
-     ) : null} 
-     <Button title="Hide/Show CardComponent" onPress={changeShowCard}/>
-    </View>
-  )
+  <NavigationContainer>
+    <Stack.Navigator initialRouteName='Home'>
+      <Stack.Screen name='Home' component={HomeScreen}  />
+      <Stack.Screen name='Login' component={SigninScreen} options={{headerShown:false}}/>
+    </Stack.Navigator>
+  </NavigationContainer>  
+  );
 }
 
 
